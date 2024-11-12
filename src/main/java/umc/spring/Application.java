@@ -7,6 +7,8 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
+import umc.spring.domain.enums.MissionStatus;
+import umc.spring.service.MemberMissionService.MemberMissionQueryService;
 import umc.spring.service.StoreService.StoreQueryService;
 
 @EnableJpaAuditing
@@ -24,13 +26,12 @@ public class Application {
 	public CommandLineRunner run(ApplicationContext ctx) {
 		return args -> {
 			StoreQueryService storeQueryService = ctx.getBean(StoreQueryService.class);
+			MemberMissionQueryService memberMissionQueryService = ctx.getBean(MemberMissionQueryService.class);
 
 			String name = "요아정";
 			Float score = 4.0f;
-
-			System.out.println("Executing findStoresByNameAndScore with parameters:");
-			System.out.println("Name: " + name);
-			System.out.println("Score: " + score);
+			Long memberId = 1L;
+			MissionStatus missionStatus = MissionStatus.COMPLETED;
 
 			// 검색 결과로 얻은 Store 객체들을 forEach(System.out::println);을 통해 콘솔에 출력
 			storeQueryService.findStoresByNameAndScore(name, score)
