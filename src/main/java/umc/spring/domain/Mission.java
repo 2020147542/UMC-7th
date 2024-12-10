@@ -5,7 +5,7 @@ import lombok.*;
 import umc.spring.domain.common.BaseEntity;
 import umc.spring.domain.mapping.MemberMission;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,14 +22,14 @@ public class Mission extends BaseEntity {
 
     private Integer reward;
 
-    private LocalDateTime deadline;
+    private LocalDate deadline;
 
     private String missionSpec;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="store_id")
+    @JoinColumn(name = "store_id")
     private Store store;
 
     @OneToMany(mappedBy = "mission", cascade = CascadeType.ALL)
-    private List<MemberMission> memberMissions = new ArrayList<>();
+    private List<MemberMission> memberMissionList = new ArrayList<>();
 }

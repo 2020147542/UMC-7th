@@ -18,22 +18,22 @@ public class Store extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(columnDefinition = "VARCHAR(50)")
     private String name;
 
-    @Column(columnDefinition = "VARCHAR(50)")
     private String address;
 
     private Float score;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="region_id")
+    @JoinColumn(name = "region_id")
     private Region region;
 
     @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
-    private List<Review> reviews = new ArrayList<>();
+    private List<Mission> missionList = new ArrayList<>();
 
-    // 가게 정보 출력
+    @OneToMany(mappedBy = "store", cascade = CascadeType.ALL)
+    private List<Review> reviewList = new ArrayList<>();
+
     @Override
     public String toString() {
         return "Store{" +
@@ -41,7 +41,7 @@ public class Store extends BaseEntity {
                 ", name='" + name + '\'' +
                 ", address='" + address + '\'' +
                 ", score=" + score +
-                ", region=" + (region != null ? region.getName() : "N/A") +
+                ", region=" + (region != null ? region.getName() : "N/A") + // region의 이름 출력
                 '}';
     }
 }

@@ -17,16 +17,16 @@ public class StoreQueryServiceImpl implements StoreQueryService{
     private final StoreRepository storeRepository;
 
     @Override
-    public Optional<Store> findStore(Long id){
-
+    public Optional<Store> findStore(Long id) {
         return storeRepository.findById(id);
     }
 
     @Override
-    public List<Store> findStoresByNameAndScore(String name, Float score){
-        List<Store> filteredStored =  storeRepository.dynamicQueryWithBooleanBuilder(name, score);
-        filteredStored.forEach(store -> System.out.println("Store: " + store ));
+    public List<Store> findStoresByNameAndScore(String name, Float score) {
+        List<Store> filteredStores = storeRepository.dynamicQueryWithBooleanBuilder(name, score);
 
-        return filteredStored;
+        filteredStores.forEach(store -> System.out.println("Store: " + store));
+
+        return filteredStores;
     }
 }
